@@ -180,6 +180,87 @@
         <p><strong>Key Point:</strong> CLO rubrics serve a dual purpose: they verify that your constructive alignment is working, and they provide the data needed for continual quality improvement (CQI).</p>
     </div>
 
+    <!-- Matching Exercise -->
+    <div class="match-box" id="match-quiz-06">
+        <h3>Classify Each Statement</h3>
+        <p style="margin-bottom: 0.8em;">For each statement below, select whether it describes an <strong>Assessment Rubric</strong> or a <strong>CLO Rubric</strong>.</p>
+        <div class="match-grid">
+            <div class="match-term">1. Scores a student&rsquo;s performance on a single assignment</div>
+            <div class="match-arrow">&rarr;</div>
+            <select class="match-select" data-correct="Assessment Rubric">
+                <option value="">Select&hellip;</option>
+                <option value="Assessment Rubric">Assessment Rubric</option>
+                <option value="CLO Rubric">CLO Rubric</option>
+            </select>
+
+            <div class="match-term">2. Produces an attainment percentage for a learning outcome</div>
+            <div class="match-arrow">&rarr;</div>
+            <select class="match-select" data-correct="CLO Rubric">
+                <option value="">Select&hellip;</option>
+                <option value="Assessment Rubric">Assessment Rubric</option>
+                <option value="CLO Rubric">CLO Rubric</option>
+            </select>
+
+            <div class="match-term">3. Criteria are derived from the specific task requirements</div>
+            <div class="match-arrow">&rarr;</div>
+            <select class="match-select" data-correct="Assessment Rubric">
+                <option value="">Select&hellip;</option>
+                <option value="Assessment Rubric">Assessment Rubric</option>
+                <option value="CLO Rubric">CLO Rubric</option>
+            </select>
+
+            <div class="match-term">4. Used primarily for quality assurance and CQI reporting</div>
+            <div class="match-arrow">&rarr;</div>
+            <select class="match-select" data-correct="CLO Rubric">
+                <option value="">Select&hellip;</option>
+                <option value="Assessment Rubric">Assessment Rubric</option>
+                <option value="CLO Rubric">CLO Rubric</option>
+            </select>
+
+            <div class="match-term">5. Aggregates evidence from multiple assessment tasks across a course</div>
+            <div class="match-arrow">&rarr;</div>
+            <select class="match-select" data-correct="CLO Rubric">
+                <option value="">Select&hellip;</option>
+                <option value="Assessment Rubric">Assessment Rubric</option>
+                <option value="CLO Rubric">CLO Rubric</option>
+            </select>
+        </div>
+        <button class="mcq-check-btn" onclick="checkMatch('match-quiz-06')" style="margin-top: 1em;">Check Answers</button>
+        <div class="match-result" id="match-quiz-06-fb"></div>
+    </div>
+
+    <!-- True/False Set -->
+    <div class="tf-box" id="tf-quiz-06">
+        <h3>True or False?</h3>
+
+        <div class="tf-statement">
+            <span>1. An assessment rubric and a CLO rubric serve the same purpose &mdash; they just operate at different levels of detail.</span>
+            <span class="tf-btns">
+                <button onclick="checkTF(this, false)">True</button>
+                <button onclick="checkTF(this, false)">False</button>
+            </span>
+            <div class="tf-feedback">False. They serve fundamentally different purposes. An assessment rubric answers &ldquo;How well did the student perform on this task?&rdquo; and is used for grading. A CLO rubric answers &ldquo;Has the student achieved this learning outcome?&rdquo; and is used for quality assurance and CQI. Different questions, different audiences, different tools.</div>
+        </div>
+
+        <div class="tf-statement">
+            <span>2. A single CLO can be assessed through multiple tasks, each with its own assessment rubric, and then aggregated by a CLO rubric.</span>
+            <span class="tf-btns">
+                <button onclick="checkTF(this, true)">True</button>
+                <button onclick="checkTF(this, true)">False</button>
+            </span>
+            <div class="tf-feedback">Correct. A CLO is typically assessed through 2&ndash;3 different tasks, each scored with its own assessment rubric. The CLO rubric then brings these scores together, weighting them according to their contribution to the outcome, to determine whether the CLO has been achieved at the course level.</div>
+        </div>
+
+        <div class="tf-statement">
+            <span>3. If a CLO requires evaluation (C5) but the assessment only tests recall (C1), a high CLO attainment percentage is still a valid measure of outcome achievement.</span>
+            <span class="tf-btns">
+                <button onclick="checkTF(this, false)">True</button>
+                <button onclick="checkTF(this, false)">False</button>
+            </span>
+            <div class="tf-feedback">False. If the task&ndash;rubric alignment is broken &mdash; for example, a C5 outcome assessed through a recall-level task &mdash; high attainment scores do not mean students can actually evaluate. The CLO rubric is only as valid as the assessments feeding into it. This is why constructive alignment must be verified at every level of the chain.</div>
+        </div>
+    </div>
+
     <div class="references">
         <h3>References</h3>
         <p>Banta, T. W., &amp; Palomba, C. A. (2014). <em>Assessment essentials: Planning, implementing, and improving assessment in higher education</em> (2nd ed.). Jossey-Bass.</p>
@@ -196,6 +277,7 @@
     <script>
     var selectedOptions = {};
 
+    /* --- MCQ --- */
     function selectOption(questionId, optionIndex) {
         var options = document.getElementById(questionId + '-options').children;
         for (var i = 0; i < options.length; i++) {
@@ -226,6 +308,73 @@
         } else {
             options[selectedIndex].classList.add('incorrect');
             feedback.className = 'mcq-feedback show incorrect-fb';
+        }
+    }
+
+    /* --- Matching quiz --- */
+    function checkMatch(boxId) {
+        var box = document.getElementById(boxId);
+        var selects = box.querySelectorAll('.match-select');
+        var fb = document.getElementById(boxId + '-fb');
+        var correctCount = 0;
+        var total = selects.length;
+        var allSelected = true;
+        selects.forEach(function(sel) {
+            if (!sel.value) { allSelected = false; }
+        });
+        if (!allSelected) {
+            fb.textContent = 'Please select an answer for every statement before checking.';
+            fb.className = 'match-result show';
+            fb.style.background = '#f8d7da';
+            fb.style.color = '#721c24';
+            return;
+        }
+        selects.forEach(function(sel) {
+            var correct = sel.getAttribute('data-correct');
+            sel.disabled = true;
+            if (sel.value === correct) {
+                sel.style.borderColor = '#27ae60';
+                sel.style.backgroundColor = '#d4edda';
+                correctCount++;
+            } else {
+                sel.style.borderColor = '#e74c3c';
+                sel.style.backgroundColor = '#f8d7da';
+            }
+        });
+        if (correctCount === total) {
+            fb.textContent = 'All ' + total + ' statements are correctly classified. You clearly understand the distinction between assessment-level and CLO-level rubrics.';
+            fb.style.background = '#d4edda';
+            fb.style.color = '#155724';
+        } else {
+            fb.textContent = correctCount + ' out of ' + total + ' correct. Green borders show correct matches; red borders show incorrect ones. Review the key differences: assessment rubrics score individual tasks for grading, while CLO rubrics aggregate across tasks for quality assurance.';
+            fb.style.background = '#f8d7da';
+            fb.style.color = '#721c24';
+        }
+        fb.className = 'match-result show';
+        var btn = box.querySelector('.mcq-check-btn');
+        btn.disabled = true;
+        btn.textContent = 'Answered';
+    }
+
+    /* --- True/False --- */
+    function checkTF(btn, isCorrectAnswer) {
+        var statement = btn.closest('.tf-statement');
+        var buttons = statement.querySelectorAll('.tf-btns button');
+        var feedback = statement.querySelector('.tf-feedback');
+        buttons.forEach(function(b) {
+            b.disabled = true;
+            b.classList.remove('correct-btn', 'incorrect-btn');
+        });
+        if (isCorrectAnswer) {
+            btn.classList.add('correct-btn');
+            feedback.className = 'tf-feedback show correct-fb';
+        } else {
+            btn.classList.add('incorrect-btn');
+            var correctLabel = isCorrectAnswer ? 'True' : 'False';
+            buttons.forEach(function(b) {
+                if (b.textContent.trim() === correctLabel) b.classList.add('correct-btn');
+            });
+            feedback.className = 'tf-feedback show incorrect-fb';
         }
     }
     </script>

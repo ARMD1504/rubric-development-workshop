@@ -143,6 +143,67 @@
     <div class="mcq-feedback" id="mcq1-feedback"></div>
   </div>
 
+  <!-- Fill-in-the-Blank Quiz: Calibration -->
+  <div class="fib-box" id="fib-calibration">
+    <h3>Fill in the Blanks</h3>
+    <p style="margin-bottom: 1em;">Complete each sentence with the correct word or phrase, then check your answers.</p>
+
+    <div class="fib-item" id="fib-cal-1">
+      <p>1. Inter-rater reliability means different markers give the <input type="text" class="fib-input" id="fib-cal-1-input" placeholder="..." autocomplete="off"> score to the same piece of student work.</p>
+      <span class="fib-answer" data-answer="same"></span>
+    </div>
+
+    <div class="fib-item" id="fib-cal-2">
+      <p>2. If two trained markers cannot agree on a score, the most likely problem is the <input type="text" class="fib-input" id="fib-cal-2-input" placeholder="..." autocomplete="off">, not the markers themselves.</p>
+      <span class="fib-answer" data-answer="rubric"></span>
+    </div>
+
+    <div class="fib-item" id="fib-cal-3">
+      <p>3. Calibration sessions should take place <input type="text" class="fib-input" id="fib-cal-3-input" placeholder="..." autocomplete="off"> live marking begins, not after discrepancies appear in real grades.</p>
+      <span class="fib-answer" data-answer="before"></span>
+    </div>
+
+    <div class="fib-item" id="fib-cal-4">
+      <p>4. When scores diverge during calibration, markers should discuss which specific <input type="text" class="fib-input" id="fib-cal-4-input" placeholder="..." autocomplete="off"> in the descriptor led to the disagreement.</p>
+      <span class="fib-answer" data-answer="word,phrase,language,term,words"></span>
+    </div>
+
+    <button class="mcq-check-btn" onclick="checkFIB('fib-calibration', 'fib-cal-feedback')">Check Answers</button>
+    <div class="mcq-feedback" id="fib-cal-feedback"></div>
+  </div>
+
+  <!-- True/False Quiz: Calibration -->
+  <div class="tf-box" id="tf-calibration">
+    <h3>True or False?</h3>
+
+    <div class="tf-statement" id="tf-cal-1">
+      <p><strong>Statement 1:</strong> Calibration is only necessary when markers are inexperienced; academics with years of marking experience will score consistently without it.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFCal('tf-cal-1', this, 'true', 'false')">True</button>
+        <button class="tf-btn" onclick="checkTFCal('tf-cal-1', this, 'false', 'false')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-cal-1-feedback"></div>
+
+    <div class="tf-statement" id="tf-cal-2">
+      <p><strong>Statement 2:</strong> A successful calibration session may result in revisions to the rubric itself, not just agreement among markers.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFCal('tf-cal-2', this, 'true', 'true')">True</button>
+        <button class="tf-btn" onclick="checkTFCal('tf-cal-2', this, 'false', 'true')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-cal-2-feedback"></div>
+
+    <div class="tf-statement" id="tf-cal-3">
+      <p><strong>Statement 3:</strong> Calibration is complete once all markers agree on exactly the same numerical score for a sample piece of work.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFCal('tf-cal-3', this, 'true', 'false')">True</button>
+        <button class="tf-btn" onclick="checkTFCal('tf-cal-3', this, 'false', 'false')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-cal-3-feedback"></div>
+  </div>
+
   <!-- References -->
   <div class="references">
     <h3>References</h3>
@@ -188,6 +249,87 @@
         if (correctEl) correctEl.classList.add('correct');
         fb.className = 'mcq-feedback show incorrect-fb';
         fb.textContent = 'Not quite. Large scoring discrepancies usually indicate that the rubric language is open to different interpretations. Calibration sessions help markers develop shared understanding and may reveal where the rubric needs revision.';
+      }
+    }
+
+    /* Fill-in-the-blank quiz */
+    function checkFIB(boxId, feedbackId) {
+      var items = document.querySelectorAll('#' + boxId + ' .fib-item');
+      var feedback = document.getElementById(feedbackId);
+      var correctCount = 0;
+      var totalCount = items.length;
+
+      for (var i = 0; i < items.length; i++) {
+        var input = items[i].querySelector('.fib-input');
+        var answerEl = items[i].querySelector('.fib-answer');
+        var acceptedAnswers = answerEl.getAttribute('data-answer').toLowerCase().split(',');
+        var userAnswer = input.value.trim().toLowerCase();
+
+        items[i].classList.remove('correct', 'incorrect');
+
+        if (userAnswer === '') {
+          items[i].classList.add('incorrect');
+          continue;
+        }
+
+        var isCorrect = false;
+        for (var j = 0; j < acceptedAnswers.length; j++) {
+          if (userAnswer === acceptedAnswers[j].trim()) {
+            isCorrect = true;
+            break;
+          }
+        }
+
+        if (isCorrect) {
+          items[i].classList.add('correct');
+          correctCount++;
+        } else {
+          items[i].classList.add('incorrect');
+        }
+      }
+
+      if (correctCount === totalCount) {
+        feedback.textContent = 'All correct! You clearly understand the core concepts behind calibration.';
+        feedback.className = 'mcq-feedback show correct-fb';
+      } else {
+        var correctAnswers = ['same', 'rubric', 'before', 'word / phrase / language'];
+        feedback.textContent = 'You got ' + correctCount + ' out of ' + totalCount + ' correct. The correct answers are: (1) same, (2) rubric, (3) before, (4) word/phrase/language. Green items are correct; review the ones highlighted in red.';
+        feedback.className = 'mcq-feedback show incorrect-fb';
+      }
+    }
+
+    /* True/False quiz for calibration */
+    function checkTFCal(statementId, btnEl, chosen, correct) {
+      var feedbackEl = document.getElementById(statementId + '-feedback');
+      var btns = document.querySelectorAll('#' + statementId + ' .tf-btn');
+
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].disabled = true;
+        btns[i].classList.remove('tf-correct', 'tf-incorrect');
+      }
+
+      var correctMessages = {
+        'tf-cal-1': 'Correct! Even experienced markers can interpret rubric language differently. Calibration ensures consistency regardless of experience level.',
+        'tf-cal-2': 'Correct! Calibration often reveals ambiguous descriptors or missing criteria that need revision \u2014 it improves the rubric, not just marker agreement.',
+        'tf-cal-3': 'Correct! The goal is agreement within one performance band, not an identical numerical score. Markers should share a common interpretation of quality, not produce the same number.'
+      };
+
+      var wrongMessages = {
+        'tf-cal-1': 'Not quite. Experience does not eliminate interpretive differences. Even seasoned academics can read rubric descriptors differently, which is why calibration matters for every marking team.',
+        'tf-cal-2': 'Not quite. Calibration frequently surfaces problems in the rubric itself \u2014 ambiguous words, missing criteria, or unclear boundaries \u2014 and revising the rubric is a perfectly valid outcome.',
+        'tf-cal-3': 'Not quite. Calibration aims for agreement within one performance band, not a single score. A difference of a few marks within the same band is acceptable; what matters is shared interpretation of quality levels.'
+      };
+
+      if (chosen === correct) {
+        btnEl.classList.add('tf-correct');
+        feedbackEl.textContent = correctMessages[statementId] || 'Correct!';
+        feedbackEl.className = 'tf-feedback show correct-fb';
+      } else {
+        btnEl.classList.add('tf-incorrect');
+        var correctIndex = (correct === 'true') ? 0 : 1;
+        btns[correctIndex].classList.add('tf-correct');
+        feedbackEl.textContent = wrongMessages[statementId] || 'Not quite.';
+        feedbackEl.className = 'tf-feedback show incorrect-fb';
       }
     }
   </script>

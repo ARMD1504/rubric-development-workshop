@@ -146,14 +146,6 @@
         <p>Your CLO rubric is a <strong>quality assurance tool</strong>, not a grading tool. It tells you whether your course design is working, not whether individual students pass or fail.</p>
     </div>
 
-    <!-- Mid-Course Reflection -->
-    <div class="reflection-box">
-        <h3>Pause and Reflect</h3>
-        <p>You have now worked through both assessment rubrics and CLO rubrics. Before you move on, take a moment to connect what you have read to your own context.</p>
-        <p><strong>How does your institution currently measure CLO attainment?</strong> Does the process match what you have just read &mdash; aggregating across multiple tasks, setting thresholds before the course begins, and linking results to CQI actions? If not, what gaps do you notice?</p>
-        <textarea rows="4" placeholder="Type your reflection here. Your responses stay private and are not submitted."></textarea>
-    </div>
-
     <h2>Check Your Understanding</h2>
 
     <div class="mcq-box">
@@ -169,6 +161,128 @@
         <div class="mcq-feedback" id="q1-feedback">
             When attainment falls below the threshold, the appropriate response is a CQI review. Lowering the threshold without investigating the cause would mask the underlying problem.
         </div>
+    </div>
+
+    <!-- Ordering Quiz: CLO Rubric Construction Steps -->
+    <div class="order-box" id="order-clo-steps">
+        <h3>Put the Steps in Order</h3>
+        <p style="margin-bottom: 1em;">Drag the steps of CLO rubric construction into the correct sequence by assigning a number (1 = first, 6 = last) to each step.</p>
+        <ul class="order-list" id="order-clo-list">
+            <li class="order-item">
+                <select class="order-select" data-correct="5">
+                    <option value="">?</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <span class="order-text">Create the rubric grid with criteria, attainment levels, and descriptors</span>
+            </li>
+            <li class="order-item">
+                <select class="order-select" data-correct="1">
+                    <option value="">?</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <span class="order-text">Start with the CLO statement and identify its cognitive level</span>
+            </li>
+            <li class="order-item">
+                <select class="order-select" data-correct="4">
+                    <option value="">?</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <span class="order-text">Define what &ldquo;achieved&rdquo; means at the outcome level (set the threshold)</span>
+            </li>
+            <li class="order-item">
+                <select class="order-select" data-correct="6">
+                    <option value="">?</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <span class="order-text">Set CQI action triggers for when attainment falls below threshold</span>
+            </li>
+            <li class="order-item">
+                <select class="order-select" data-correct="2">
+                    <option value="">?</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <span class="order-text">Identify which assessments contribute to this CLO</span>
+            </li>
+            <li class="order-item">
+                <select class="order-select" data-correct="3">
+                    <option value="">?</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+                <span class="order-text">Determine the weight of each assessment&rsquo;s contribution</span>
+            </li>
+        </ul>
+        <button class="mcq-check-btn" onclick="checkOrder('order-clo-list', 'order-clo-feedback')">Check Order</button>
+        <div class="mcq-feedback" id="order-clo-feedback"></div>
+    </div>
+
+    <!-- True/False Quiz: CLO Rubric Construction -->
+    <div class="tf-box" id="tf-clo-construction">
+        <h3>True or False?</h3>
+
+        <div class="tf-statement" id="tf-clo-1">
+            <p><strong>Statement 1:</strong> The attainment threshold for a CLO should be set after reviewing student results so that it reflects realistic expectations.</p>
+            <span class="tf-btns">
+                <button class="tf-btn" onclick="checkTF('tf-clo-1', this, 'true', 'false')">True</button>
+                <button class="tf-btn" onclick="checkTF('tf-clo-1', this, 'false', 'false')">False</button>
+            </span>
+        </div>
+        <div class="tf-feedback" id="tf-clo-1-feedback"></div>
+
+        <div class="tf-statement" id="tf-clo-2">
+            <p><strong>Statement 2:</strong> A CLO rubric uses the proportion of students meeting a benchmark &mdash; not individual student scores &mdash; to determine whether the outcome is attained.</p>
+            <span class="tf-btns">
+                <button class="tf-btn" onclick="checkTF('tf-clo-2', this, 'true', 'true')">True</button>
+                <button class="tf-btn" onclick="checkTF('tf-clo-2', this, 'false', 'true')">False</button>
+            </span>
+        </div>
+        <div class="tf-feedback" id="tf-clo-2-feedback"></div>
+
+        <div class="tf-statement" id="tf-clo-3">
+            <p><strong>Statement 3:</strong> If a CLO is not attained, the best response is to lower the threshold for the next semester so that the attainment data improves.</p>
+            <span class="tf-btns">
+                <button class="tf-btn" onclick="checkTF('tf-clo-3', this, 'true', 'false')">True</button>
+                <button class="tf-btn" onclick="checkTF('tf-clo-3', this, 'false', 'false')">False</button>
+            </span>
+        </div>
+        <div class="tf-feedback" id="tf-clo-3-feedback"></div>
+    </div>
+
+    <!-- Mid-Course Reflection -->
+    <div class="reflection-box">
+        <h3>Pause and Reflect</h3>
+        <p>You have now worked through both assessment rubrics and CLO rubrics. Before you move on, take a moment to connect what you have read to your own context.</p>
+        <p><strong>How does your institution currently measure CLO attainment?</strong> Does the process match what you have just read &mdash; aggregating across multiple tasks, setting thresholds before the course begins, and linking results to CQI actions? If not, what gaps do you notice?</p>
+        <textarea rows="4" placeholder="Type your reflection here. Your responses stay private and are not submitted."></textarea>
     </div>
 
     <div class="references">
@@ -218,6 +332,103 @@
         } else {
             options[selectedIndex].classList.add('incorrect');
             feedback.className = 'mcq-feedback show incorrect-fb';
+        }
+    }
+
+    /* Ordering quiz */
+    function checkOrder(listId, feedbackId) {
+        var selects = document.querySelectorAll('#' + listId + ' .order-select');
+        var feedback = document.getElementById(feedbackId);
+        var values = [];
+        var allFilled = true;
+
+        for (var i = 0; i < selects.length; i++) {
+            if (selects[i].value === '') {
+                allFilled = false;
+                break;
+            }
+            values.push(parseInt(selects[i].value));
+        }
+
+        if (!allFilled) {
+            feedback.textContent = 'Please assign a number to every step before checking.';
+            feedback.className = 'mcq-feedback show incorrect-fb';
+            return;
+        }
+
+        /* Check for duplicates */
+        var seen = {};
+        var hasDuplicates = false;
+        for (var i = 0; i < values.length; i++) {
+            if (seen[values[i]]) {
+                hasDuplicates = true;
+                break;
+            }
+            seen[values[i]] = true;
+        }
+
+        if (hasDuplicates) {
+            feedback.textContent = 'Each step needs a unique number (1\u20136). You have used the same number more than once.';
+            feedback.className = 'mcq-feedback show incorrect-fb';
+            return;
+        }
+
+        var allCorrect = true;
+        for (var i = 0; i < selects.length; i++) {
+            var correct = parseInt(selects[i].getAttribute('data-correct'));
+            var chosen = parseInt(selects[i].value);
+            var item = selects[i].closest('.order-item');
+            item.classList.remove('correct', 'incorrect');
+            if (chosen === correct) {
+                item.classList.add('correct');
+            } else {
+                item.classList.add('incorrect');
+                allCorrect = false;
+            }
+        }
+
+        if (allCorrect) {
+            feedback.textContent = 'All correct! The six steps build sequentially from the CLO statement through to CQI action triggers.';
+            feedback.className = 'mcq-feedback show correct-fb';
+        } else {
+            feedback.textContent = 'Not quite right. Steps highlighted in green are correct. The correct order is: (1) Start with CLO statement, (2) Identify contributing assessments, (3) Determine weights, (4) Define \u201Cachieved\u201D threshold, (5) Create rubric grid, (6) Set CQI action triggers.';
+            feedback.className = 'mcq-feedback show incorrect-fb';
+        }
+    }
+
+    /* True/False quiz */
+    function checkTF(statementId, btnEl, chosen, correct) {
+        var feedbackEl = document.getElementById(statementId + '-feedback');
+        var btns = document.querySelectorAll('#' + statementId + ' .tf-btn');
+
+        /* Disable buttons after answering */
+        for (var i = 0; i < btns.length; i++) {
+            btns[i].disabled = true;
+            btns[i].classList.remove('tf-correct', 'tf-incorrect');
+        }
+
+        var feedbackMessages = {
+            'tf-clo-1': 'Correct! Thresholds must be set before the course begins. Setting them after seeing results is retroactive adjustment and undermines the rubric as a quality assurance tool.',
+            'tf-clo-2': 'Correct! CLO rubrics operate at the cohort level \u2014 they measure what proportion of students meet the benchmark, not whether any single student passes.',
+            'tf-clo-3': 'Correct! Lowering the threshold to improve attainment data defeats the purpose of the CLO rubric. The appropriate response is a CQI review of teaching methods, assessment design, and curriculum alignment.'
+        };
+
+        if (chosen === correct) {
+            btnEl.classList.add('tf-correct');
+            feedbackEl.textContent = feedbackMessages[statementId] || 'Correct!';
+            feedbackEl.className = 'tf-feedback show correct-fb';
+        } else {
+            btnEl.classList.add('tf-incorrect');
+            /* Highlight the correct button */
+            var correctIndex = (correct === 'true') ? 0 : 1;
+            btns[correctIndex].classList.add('tf-correct');
+            var wrongMessages = {
+                'tf-clo-1': 'Not quite. Thresholds must be set before the course begins \u2014 adjusting them after seeing results is retroactive and undermines the rubric\u2019s integrity.',
+                'tf-clo-2': 'Not quite. CLO rubrics measure the proportion of students meeting a benchmark at the cohort level, not individual student performance.',
+                'tf-clo-3': 'Not quite. Lowering the threshold masks the real problem. The correct response is a CQI review to address why attainment was low.'
+            };
+            feedbackEl.textContent = wrongMessages[statementId] || 'Not quite.';
+            feedbackEl.className = 'tf-feedback show incorrect-fb';
         }
     }
     </script>

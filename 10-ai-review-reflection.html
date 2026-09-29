@@ -72,6 +72,65 @@
     </ul>
   </div>
 
+  <!-- Check Your Understanding -->
+  <h2>Check Your Understanding</h2>
+
+  <!-- True/False Quiz: AI-Assisted Review -->
+  <div class="tf-box" id="tf-ai-review">
+    <h3>True or False?</h3>
+
+    <div class="tf-statement" id="tf-ai-1">
+      <p><strong>Statement 1:</strong> AI feedback should replace your professional judgment when finalising a rubric, since the AI is more objective than a human reviewer.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFAi('tf-ai-1', this, 'true', 'false')">True</button>
+        <button class="tf-btn" onclick="checkTFAi('tf-ai-1', this, 'false', 'false')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-ai-1-feedback"></div>
+
+    <div class="tf-statement" id="tf-ai-2">
+      <p><strong>Statement 2:</strong> Running the AI review twice &mdash; once before revision and once after &mdash; helps you check whether your improvements are recognised by the tool.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFAi('tf-ai-2', this, 'true', 'true')">True</button>
+        <button class="tf-btn" onclick="checkTFAi('tf-ai-2', this, 'false', 'true')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-ai-2-feedback"></div>
+
+    <div class="tf-statement" id="tf-ai-3">
+      <p><strong>Statement 3:</strong> AI tools are strongest at detecting structural issues in rubrics, such as inconsistent parallel language or missing criteria across performance levels.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFAi('tf-ai-3', this, 'true', 'true')">True</button>
+        <button class="tf-btn" onclick="checkTFAi('tf-ai-3', this, 'false', 'true')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-ai-3-feedback"></div>
+  </div>
+
+  <!-- Fill-in-the-Blank Quiz: Workshop Summary -->
+  <div class="fib-box" id="fib-workshop-summary">
+    <h3>Workshop Recap: Fill in the Blanks</h3>
+    <p style="margin-bottom: 1em;">Complete each sentence to test your recall of key concepts from the workshop.</p>
+
+    <div class="fib-item" id="fib-ws-1">
+      <p>1. In a CLO rubric, attainment is measured by the <input type="text" class="fib-input" id="fib-ws-1-input" placeholder="..." autocomplete="off"> of students who meet the benchmark, not by individual student scores.</p>
+      <span class="fib-answer" data-answer="proportion,percentage,percent,proportion of students"></span>
+    </div>
+
+    <div class="fib-item" id="fib-ws-2">
+      <p>2. The verb in a CLO statement tells you the <input type="text" class="fib-input" id="fib-ws-2-input" placeholder="..." autocomplete="off"> level of the learning outcome, which determines the type of evidence you need to collect.</p>
+      <span class="fib-answer" data-answer="cognitive,bloom's,blooms,cognitive level,bloom,taxonomy"></span>
+    </div>
+
+    <div class="fib-item" id="fib-ws-3">
+      <p>3. When markers calibrate, they independently score the same sample and then discuss how they <input type="text" class="fib-input" id="fib-ws-3-input" placeholder="..." autocomplete="off"> the rubric descriptors to reach a shared understanding.</p>
+      <span class="fib-answer" data-answer="interpret,apply,interpreted,applied,interpretation"></span>
+    </div>
+
+    <button class="mcq-check-btn" onclick="checkFIBws('fib-workshop-summary', 'fib-ws-feedback')">Check Answers</button>
+    <div class="mcq-feedback" id="fib-ws-feedback"></div>
+  </div>
+
   <!-- Part 2: Learning Reflection -->
   <h2>Part 2: Learning Reflection</h2>
 
@@ -130,6 +189,88 @@
     <a href="09-capstone.html">&larr; Page 9: Capstone</a>
     <a href="00-homepage.html">Home</a>
   </nav>
+
+  <script>
+    /* True/False quiz for AI review */
+    function checkTFAi(statementId, btnEl, chosen, correct) {
+      var feedbackEl = document.getElementById(statementId + '-feedback');
+      var btns = document.querySelectorAll('#' + statementId + ' .tf-btn');
+
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].disabled = true;
+        btns[i].classList.remove('tf-correct', 'tf-incorrect');
+      }
+
+      var correctMessages = {
+        'tf-ai-1': 'Correct! AI feedback is a starting point for improvement, not a replacement for your disciplinary expertise. You should evaluate every AI suggestion against your knowledge of the course, students, and field.',
+        'tf-ai-2': 'Correct! A before-and-after comparison lets you verify that the AI recognises your revisions and catches any new issues you may have inadvertently introduced during editing.',
+        'tf-ai-3': 'Correct! AI excels at pattern detection \u2014 it can quickly spot non-parallel language, inconsistent structure, and missing criteria across levels. It is less reliable for judging disciplinary validity or appropriate cognitive complexity.'
+      };
+
+      var wrongMessages = {
+        'tf-ai-1': 'Not quite. AI should supplement, not replace, your professional judgment. The AI lacks context about your discipline, students, and institutional requirements \u2014 you are the final arbiter of quality.',
+        'tf-ai-2': 'Not quite. Running the review twice is recommended precisely because it lets you check whether improvements are recognised and whether any new issues were introduced during revision.',
+        'tf-ai-3': 'Not quite. AI tools are indeed strongest at detecting structural patterns \u2014 parallel language, consistent criteria across levels, and completeness. They are weaker at judging whether the content is valid for your specific discipline.'
+      };
+
+      if (chosen === correct) {
+        btnEl.classList.add('tf-correct');
+        feedbackEl.textContent = correctMessages[statementId] || 'Correct!';
+        feedbackEl.className = 'tf-feedback show correct-fb';
+      } else {
+        btnEl.classList.add('tf-incorrect');
+        var correctIndex = (correct === 'true') ? 0 : 1;
+        btns[correctIndex].classList.add('tf-correct');
+        feedbackEl.textContent = wrongMessages[statementId] || 'Not quite.';
+        feedbackEl.className = 'tf-feedback show incorrect-fb';
+      }
+    }
+
+    /* Fill-in-the-blank quiz for workshop summary */
+    function checkFIBws(boxId, feedbackId) {
+      var items = document.querySelectorAll('#' + boxId + ' .fib-item');
+      var feedback = document.getElementById(feedbackId);
+      var correctCount = 0;
+      var totalCount = items.length;
+
+      for (var i = 0; i < items.length; i++) {
+        var input = items[i].querySelector('.fib-input');
+        var answerEl = items[i].querySelector('.fib-answer');
+        var acceptedAnswers = answerEl.getAttribute('data-answer').toLowerCase().split(',');
+        var userAnswer = input.value.trim().toLowerCase();
+
+        items[i].classList.remove('correct', 'incorrect');
+
+        if (userAnswer === '') {
+          items[i].classList.add('incorrect');
+          continue;
+        }
+
+        var isCorrect = false;
+        for (var j = 0; j < acceptedAnswers.length; j++) {
+          if (userAnswer === acceptedAnswers[j].trim()) {
+            isCorrect = true;
+            break;
+          }
+        }
+
+        if (isCorrect) {
+          items[i].classList.add('correct');
+          correctCount++;
+        } else {
+          items[i].classList.add('incorrect');
+        }
+      }
+
+      if (correctCount === totalCount) {
+        feedback.textContent = 'All correct! You have a solid grasp of the core concepts from this workshop.';
+        feedback.className = 'mcq-feedback show correct-fb';
+      } else {
+        feedback.textContent = 'You got ' + correctCount + ' out of ' + totalCount + ' correct. The answers are: (1) proportion/percentage, (2) cognitive (or Bloom\u2019s), (3) interpret (or apply). Green items are correct; review the ones highlighted in red.';
+        feedback.className = 'mcq-feedback show incorrect-fb';
+      }
+    }
+  </script>
 
 </body>
 </html>

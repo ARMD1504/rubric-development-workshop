@@ -223,6 +223,107 @@
     <p>Have the original issues been addressed? Are there any remaining concerns? Is this rubric now ready for use with my students?</p>
   </div>
 
+  <!-- Check Your Understanding -->
+  <h2>Check Your Understanding</h2>
+
+  <!-- True/False Quiz: Capstone / Rubric Design -->
+  <div class="tf-box" id="tf-capstone">
+    <h3>True or False?</h3>
+
+    <div class="tf-statement" id="tf-cap-1">
+      <p><strong>Statement 1:</strong> You should set attainment thresholds after seeing student results so that the targets are realistic and achievable.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFCap('tf-cap-1', this, 'true', 'false')">True</button>
+        <button class="tf-btn" onclick="checkTFCap('tf-cap-1', this, 'false', 'false')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-cap-1-feedback"></div>
+
+    <div class="tf-statement" id="tf-cap-2">
+      <p><strong>Statement 2:</strong> A colleague who was not involved in writing the rubric is the best person to test whether it can be used consistently.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFCap('tf-cap-2', this, 'true', 'true')">True</button>
+        <button class="tf-btn" onclick="checkTFCap('tf-cap-2', this, 'false', 'true')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-cap-2-feedback"></div>
+
+    <div class="tf-statement" id="tf-cap-3">
+      <p><strong>Statement 3:</strong> The lowest performance level in a rubric should describe only what is absent or wrong in the student&rsquo;s work.</p>
+      <span class="tf-btns">
+        <button class="tf-btn" onclick="checkTFCap('tf-cap-3', this, 'true', 'false')">True</button>
+        <button class="tf-btn" onclick="checkTFCap('tf-cap-3', this, 'false', 'false')">False</button>
+      </span>
+    </div>
+    <div class="tf-feedback" id="tf-cap-3-feedback"></div>
+  </div>
+
+  <!-- Matching Quiz: Quality Criteria to Warning Signs -->
+  <div class="match-box" id="match-capstone">
+    <h3>Match Quality Criteria to Their Warning Signs</h3>
+    <p style="margin-bottom: 1em;">Each quality criterion on the left has a warning sign that indicates it is missing. Select the correct warning sign from the dropdown menu.</p>
+
+    <div class="match-grid">
+      <div class="match-term">Parallel structure</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" id="match-cap-1" data-correct="a">
+        <option value="">Select...</option>
+        <option value="a">Descriptors shift dimensions between levels (e.g., from &ldquo;content&rdquo; at one level to &ldquo;grammar&rdquo; at the next)</option>
+        <option value="b">Criteria at the lowest level measure skills not stated in the CLO</option>
+        <option value="c">Descriptors use vague terms like &ldquo;adequate&rdquo; or &ldquo;reasonable effort&rdquo;</option>
+        <option value="d">Abrupt jumps in expectation between adjacent performance levels</option>
+        <option value="e">Different criteria appear at different performance levels</option>
+      </select>
+
+      <div class="match-term">Coherence</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" id="match-cap-2" data-correct="e">
+        <option value="">Select...</option>
+        <option value="a">Descriptors shift dimensions between levels (e.g., from &ldquo;content&rdquo; at one level to &ldquo;grammar&rdquo; at the next)</option>
+        <option value="b">Criteria at the lowest level measure skills not stated in the CLO</option>
+        <option value="c">Descriptors use vague terms like &ldquo;adequate&rdquo; or &ldquo;reasonable effort&rdquo;</option>
+        <option value="d">Abrupt jumps in expectation between adjacent performance levels</option>
+        <option value="e">Different criteria appear at different performance levels</option>
+      </select>
+
+      <div class="match-term">Observable language</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" id="match-cap-3" data-correct="c">
+        <option value="">Select...</option>
+        <option value="a">Descriptors shift dimensions between levels (e.g., from &ldquo;content&rdquo; at one level to &ldquo;grammar&rdquo; at the next)</option>
+        <option value="b">Criteria at the lowest level measure skills not stated in the CLO</option>
+        <option value="c">Descriptors use vague terms like &ldquo;adequate&rdquo; or &ldquo;reasonable effort&rdquo;</option>
+        <option value="d">Abrupt jumps in expectation between adjacent performance levels</option>
+        <option value="e">Different criteria appear at different performance levels</option>
+      </select>
+
+      <div class="match-term">Validity</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" id="match-cap-4" data-correct="b">
+        <option value="">Select...</option>
+        <option value="a">Descriptors shift dimensions between levels (e.g., from &ldquo;content&rdquo; at one level to &ldquo;grammar&rdquo; at the next)</option>
+        <option value="b">Criteria at the lowest level measure skills not stated in the CLO</option>
+        <option value="c">Descriptors use vague terms like &ldquo;adequate&rdquo; or &ldquo;reasonable effort&rdquo;</option>
+        <option value="d">Abrupt jumps in expectation between adjacent performance levels</option>
+        <option value="e">Different criteria appear at different performance levels</option>
+      </select>
+
+      <div class="match-term">Continuous</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" id="match-cap-5" data-correct="d">
+        <option value="">Select...</option>
+        <option value="a">Descriptors shift dimensions between levels (e.g., from &ldquo;content&rdquo; at one level to &ldquo;grammar&rdquo; at the next)</option>
+        <option value="b">Criteria at the lowest level measure skills not stated in the CLO</option>
+        <option value="c">Descriptors use vague terms like &ldquo;adequate&rdquo; or &ldquo;reasonable effort&rdquo;</option>
+        <option value="d">Abrupt jumps in expectation between adjacent performance levels</option>
+        <option value="e">Different criteria appear at different performance levels</option>
+      </select>
+    </div>
+
+    <button class="mcq-check-btn" onclick="checkMatch('match-capstone', 'match-cap-feedback', 5)">Check Matches</button>
+    <div class="mcq-feedback" id="match-cap-feedback"></div>
+  </div>
+
   <!-- References -->
   <div class="references">
     <h3>References</h3>
@@ -235,6 +336,87 @@
     <a href="08-calibration.html">&larr; Page 8: Calibration</a>
     <a href="10-ai-review-reflection.html">Page 10: AI Review &amp; Reflection &rarr;</a>
   </nav>
+
+  <script>
+    /* True/False quiz for capstone */
+    function checkTFCap(statementId, btnEl, chosen, correct) {
+      var feedbackEl = document.getElementById(statementId + '-feedback');
+      var btns = document.querySelectorAll('#' + statementId + ' .tf-btn');
+
+      for (var i = 0; i < btns.length; i++) {
+        btns[i].disabled = true;
+        btns[i].classList.remove('tf-correct', 'tf-incorrect');
+      }
+
+      var correctMessages = {
+        'tf-cap-1': 'Correct! Thresholds must be decided before the course begins. Setting them after seeing results is retroactive adjustment and compromises the rubric as a quality assurance tool.',
+        'tf-cap-2': 'Correct! Someone who did not write the rubric has no built-in assumptions about what the descriptors mean. If they can use it to score consistently, the rubric language is clear.',
+        'tf-cap-3': 'Correct! Every level, including the lowest, should describe what IS present in the student\u2019s work. Describing only absence or failure makes it impossible for markers to distinguish between different types of weak performance.'
+      };
+
+      var wrongMessages = {
+        'tf-cap-1': 'Not quite. Setting thresholds after seeing results is retroactive adjustment. The threshold must be decided before the course begins to preserve the rubric\u2019s integrity as a quality assurance measure.',
+        'tf-cap-2': 'Not quite. A colleague unfamiliar with the rubric is actually the best tester because they bring no hidden assumptions. If they can score consistently using only the rubric text, the language is clear enough.',
+        'tf-cap-3': 'Not quite. The lowest level should describe what IS present at that performance level \u2014 for example, \u201Cdescribes features without analysis\u201D rather than \u201Cdoes not analyse.\u201D Positive description helps markers distinguish between different types of weak work.'
+      };
+
+      if (chosen === correct) {
+        btnEl.classList.add('tf-correct');
+        feedbackEl.textContent = correctMessages[statementId] || 'Correct!';
+        feedbackEl.className = 'tf-feedback show correct-fb';
+      } else {
+        btnEl.classList.add('tf-incorrect');
+        var correctIndex = (correct === 'true') ? 0 : 1;
+        btns[correctIndex].classList.add('tf-correct');
+        feedbackEl.textContent = wrongMessages[statementId] || 'Not quite.';
+        feedbackEl.className = 'tf-feedback show incorrect-fb';
+      }
+    }
+
+    /* Matching quiz */
+    function checkMatch(boxId, feedbackId, totalItems) {
+      var selects = document.querySelectorAll('#' + boxId + ' .match-select');
+      var feedback = document.getElementById(feedbackId);
+      var correctCount = 0;
+      var allAnswered = true;
+
+      for (var i = 0; i < selects.length; i++) {
+        if (selects[i].value === '') {
+          allAnswered = false;
+          break;
+        }
+      }
+
+      if (!allAnswered) {
+        feedback.textContent = 'Please make a selection for every criterion before checking.';
+        feedback.className = 'mcq-feedback show incorrect-fb';
+        return;
+      }
+
+      for (var i = 0; i < selects.length; i++) {
+        var correct = selects[i].getAttribute('data-correct');
+        var chosen = selects[i].value;
+        var row = selects[i].closest('.match-grid') || selects[i].parentElement;
+
+        selects[i].classList.remove('correct', 'incorrect');
+
+        if (chosen === correct) {
+          selects[i].classList.add('correct');
+          correctCount++;
+        } else {
+          selects[i].classList.add('incorrect');
+        }
+      }
+
+      if (correctCount === totalItems) {
+        feedback.textContent = 'All matches correct! You have a solid understanding of what each quality criterion looks like in practice and what its absence signals.';
+        feedback.className = 'mcq-feedback show correct-fb';
+      } else {
+        feedback.textContent = 'You got ' + correctCount + ' out of ' + totalItems + ' correct. Green dropdowns are correct; review the ones highlighted in red. Remember: parallel structure means the same dimension at every level, coherence means the same criteria throughout, observable language avoids vague terms, validity means measuring what the CLO intends, and continuous means smooth transitions between levels.';
+        feedback.className = 'mcq-feedback show incorrect-fb';
+      }
+    }
+  </script>
 
 </body>
 </html>

@@ -144,6 +144,103 @@
     <div class="mcq-feedback">Starting from the top establishes what full achievement looks like. You then modify the descriptor to describe progressively less achievement, maintaining parallel structure. This approach ensures that every level describes the same dimension at a different degree, rather than shifting what is being measured.</div>
   </div>
 
+  <!-- Ordering Exercise -->
+  <div class="order-box" id="order-quiz-04">
+    <h3>Put the Steps in Order</h3>
+    <p style="margin-bottom: 0.8em;">Below are five key steps for building an assessment rubric, but they have been shuffled. Use the dropdown next to each step to assign the correct order number (1&nbsp;=&nbsp;first step, 5&nbsp;=&nbsp;last step).</p>
+    <ul class="order-list">
+      <li class="order-item" data-correct="4">
+        Define performance levels (e.g., Distinction, Merit, Pass, Fail)
+        <select class="order-select" style="float:right; padding:0.3em; border:1px solid var(--border); border-radius:var(--radius); font-size:0.9em;">
+          <option value="">?</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </li>
+      <li class="order-item" data-correct="1">
+        Identify the CLO and its cognitive level (e.g., C4 Analyse)
+        <select class="order-select" style="float:right; padding:0.3em; border:1px solid var(--border); border-radius:var(--radius); font-size:0.9em;">
+          <option value="">?</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </li>
+      <li class="order-item" data-correct="5">
+        Write descriptors for each criterion at every level
+        <select class="order-select" style="float:right; padding:0.3em; border:1px solid var(--border); border-radius:var(--radius); font-size:0.9em;">
+          <option value="">?</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </li>
+      <li class="order-item" data-correct="3">
+        Assign weightage to each criterion based on CLO priorities
+        <select class="order-select" style="float:right; padding:0.3em; border:1px solid var(--border); border-radius:var(--radius); font-size:0.9em;">
+          <option value="">?</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </li>
+      <li class="order-item" data-correct="2">
+        Determine criteria from the assessment task requirements
+        <select class="order-select" style="float:right; padding:0.3em; border:1px solid var(--border); border-radius:var(--radius); font-size:0.9em;">
+          <option value="">?</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </li>
+    </ul>
+    <button class="mcq-check-btn" onclick="checkOrder('order-quiz-04')" style="margin-top: 1em;">Check Order</button>
+    <div class="mcq-feedback" id="order-quiz-04-fb"></div>
+  </div>
+
+  <!-- True/False Set -->
+  <div class="tf-box" id="tf-quiz-04">
+    <h3>True or False?</h3>
+
+    <div class="tf-statement">
+      <span>1. When building a rubric, you should write the lowest-level descriptor first and then build up to the top level.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, false)">True</button>
+        <button onclick="checkTF(this, false)">False</button>
+      </span>
+      <div class="tf-feedback">The recommended approach is the opposite: write the top-level descriptor first, then scale down. Starting from the top establishes what full achievement looks like, making it easier to describe what less of that achievement looks like at each lower level.</div>
+    </div>
+
+    <div class="tf-statement">
+      <span>2. Testing a rubric with 2&ndash;3 sample student submissions is the most important quality-assurance step in rubric development.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, true)">True</button>
+        <button onclick="checkTF(this, true)">False</button>
+      </span>
+      <div class="tf-feedback">Correct. Applying the rubric to real or hypothetical sample work reveals where descriptors are unclear, where markers disagree, and where the rubric fails to distinguish between performance levels. This calibration step is the single most effective way to improve a rubric before live use.</div>
+    </div>
+
+    <div class="tf-statement">
+      <span>3. If two criteria in a rubric always receive the same score across multiple student submissions, they may be redundant.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, true)">True</button>
+        <button onclick="checkTF(this, true)">False</button>
+      </span>
+      <div class="tf-feedback">Correct. When two criteria consistently produce identical scores, they are likely measuring the same underlying dimension. Wolf and Stevens (2007) recommend reviewing such criteria for overlap and either merging them or revising one so that it captures a genuinely distinct aspect of performance.</div>
+    </div>
+  </div>
+
   <!-- References -->
   <div class="references">
     <h3>References</h3>
@@ -158,8 +255,9 @@
     <a href="05-writing-descriptors.html">Page 5: Writing Descriptors &rarr;</a>
   </nav>
 
-  <!-- MCQ JavaScript -->
+  <!-- Quiz JavaScript -->
   <script>
+  /* --- MCQ --- */
   function selectOption(li) {
     li.parentElement.querySelectorAll('li').forEach(item => item.classList.remove('selected'));
     li.classList.add('selected');
@@ -183,6 +281,71 @@
     feedback.style.display = 'block';
     btn.disabled = true;
     btn.textContent = 'Answered';
+  }
+
+  /* --- Ordering quiz --- */
+  function checkOrder(boxId) {
+    var box = document.getElementById(boxId);
+    var items = box.querySelectorAll('.order-item');
+    var fb = document.getElementById(boxId + '-fb');
+    var allAnswered = true;
+    var allCorrect = true;
+    var usedNumbers = [];
+    items.forEach(function(item) {
+      var sel = item.querySelector('.order-select');
+      var val = sel.value;
+      if (!val) { allAnswered = false; return; }
+      if (usedNumbers.indexOf(val) !== -1) { allAnswered = false; }
+      usedNumbers.push(val);
+      var correctVal = item.getAttribute('data-correct');
+      item.classList.remove('correct-order', 'incorrect-order');
+      if (val === correctVal) {
+        item.classList.add('correct-order');
+      } else {
+        item.classList.add('incorrect-order');
+        allCorrect = false;
+      }
+      sel.disabled = true;
+    });
+    if (!allAnswered) {
+      fb.textContent = 'Please assign an order number to every step, and make sure each number is used only once.';
+      fb.className = 'mcq-feedback show incorrect-fb';
+      items.forEach(function(item) { item.querySelector('.order-select').disabled = false; });
+      return;
+    }
+    if (allCorrect) {
+      fb.textContent = 'All five steps are in the correct sequence. You start by identifying the CLO, then determine criteria, assign weightage, define performance levels, and finally write the descriptors.';
+      fb.className = 'mcq-feedback show correct-fb';
+    } else {
+      fb.textContent = 'Some steps are out of order. The correct sequence is: (1) Identify the CLO and cognitive level, (2) Determine criteria from the task, (3) Assign weightage, (4) Define performance levels, (5) Write descriptors.';
+      fb.className = 'mcq-feedback show incorrect-fb';
+    }
+    var btn = box.querySelector('.mcq-check-btn');
+    btn.disabled = true;
+    btn.textContent = 'Answered';
+  }
+
+  /* --- True/False --- */
+  function checkTF(btn, isCorrectAnswer) {
+    var statement = btn.closest('.tf-statement');
+    var buttons = statement.querySelectorAll('.tf-btns button');
+    var feedback = statement.querySelector('.tf-feedback');
+    var isTrue = (btn.textContent.trim() === 'True');
+    buttons.forEach(function(b) {
+      b.disabled = true;
+      b.classList.remove('correct-btn', 'incorrect-btn');
+    });
+    if (isCorrectAnswer) {
+      btn.classList.add('correct-btn');
+      feedback.className = 'tf-feedback show correct-fb';
+    } else {
+      btn.classList.add('incorrect-btn');
+      var correctLabel = isCorrectAnswer ? 'True' : 'False';
+      buttons.forEach(function(b) {
+        if (b.textContent.trim() === correctLabel) b.classList.add('correct-btn');
+      });
+      feedback.className = 'tf-feedback show incorrect-fb';
+    }
   }
   </script>
 

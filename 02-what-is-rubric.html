@@ -159,6 +159,87 @@
     <div class="mcq-feedback">An analytic rubric allows separate evaluation of each dimension (literature review, methodology, analysis, and writing quality), giving the student specific feedback on each area. For a Master&rsquo;s-level student who needs to know precisely where to improve, criterion-level feedback from an analytic rubric is essential.</div>
   </div>
 
+  <!-- Matching Exercise -->
+  <div class="match-box">
+    <h3>Match the Rubric Type to Its Description</h3>
+    <p>Select the correct description for each rubric type from the dropdown menus, then check your answers.</p>
+    <div class="match-grid" id="match-grid-2">
+      <div class="match-term">Analytic rubric</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" data-answer="c">
+        <option value="">-- select --</option>
+        <option value="a">Provides a single overall score based on all criteria considered together</option>
+        <option value="b">Records only the presence or absence of specific elements without describing quality</option>
+        <option value="c">Scores each criterion independently using a grid of criteria and performance levels</option>
+        <option value="d">Describes only the proficient level for each criterion, with space for marker comments</option>
+      </select>
+
+      <div class="match-term">Holistic rubric</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" data-answer="a">
+        <option value="">-- select --</option>
+        <option value="a">Provides a single overall score based on all criteria considered together</option>
+        <option value="b">Records only the presence or absence of specific elements without describing quality</option>
+        <option value="c">Scores each criterion independently using a grid of criteria and performance levels</option>
+        <option value="d">Describes only the proficient level for each criterion, with space for marker comments</option>
+      </select>
+
+      <div class="match-term">Single-point rubric</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" data-answer="d">
+        <option value="">-- select --</option>
+        <option value="a">Provides a single overall score based on all criteria considered together</option>
+        <option value="b">Records only the presence or absence of specific elements without describing quality</option>
+        <option value="c">Scores each criterion independently using a grid of criteria and performance levels</option>
+        <option value="d">Describes only the proficient level for each criterion, with space for marker comments</option>
+      </select>
+
+      <div class="match-term">Checklist</div>
+      <div class="match-arrow">&rarr;</div>
+      <select class="match-select" data-answer="b">
+        <option value="">-- select --</option>
+        <option value="a">Provides a single overall score based on all criteria considered together</option>
+        <option value="b">Records only the presence or absence of specific elements without describing quality</option>
+        <option value="c">Scores each criterion independently using a grid of criteria and performance levels</option>
+        <option value="d">Describes only the proficient level for each criterion, with space for marker comments</option>
+      </select>
+    </div>
+    <button class="mcq-check-btn" onclick="checkMatch('match-grid-2', this)">Check Answers</button>
+    <div class="match-result" id="match-result-2"></div>
+  </div>
+
+  <!-- True/False Quiz -->
+  <div class="tf-box">
+    <h3>True or False? Rubric Types</h3>
+
+    <div class="tf-statement">
+      <span>1. A checklist describes the quality of student performance across multiple levels.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, false)">True</button>
+        <button onclick="checkTF(this, false)">False</button>
+      </span>
+      <div class="tf-feedback" data-correct="false">A checklist only records the presence or absence of specific elements (e.g., &ldquo;includes a title page,&rdquo; &ldquo;cites at least three sources&rdquo;). It does not describe quality or distinguish between performance levels. A rubric goes further by combining criteria, performance descriptors, and a rating scale.</div>
+    </div>
+
+    <div class="tf-statement">
+      <span>2. Holistic rubrics provide detailed, criterion-level feedback to students.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, false)">True</button>
+        <button onclick="checkTF(this, false)">False</button>
+      </span>
+      <div class="tf-feedback" data-correct="false">Holistic rubrics provide an overall judgment based on all criteria considered together. They do not score each criterion independently, so they cannot tell a student which specific aspects were strong and which were weak. For criterion-level feedback, an analytic rubric is needed.</div>
+    </div>
+
+    <div class="tf-statement">
+      <span>3. Analytic rubrics are the most commonly used rubric type at university level, particularly for coursework assessment.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, true)">True</button>
+        <button onclick="checkTF(this, true)">False</button>
+      </span>
+      <div class="tf-feedback" data-correct="true">Correct. Analytic rubrics are the default choice for coursework at most universities because they provide criterion-level feedback that supports student learning. They allow students to see exactly where they are strong and where they need to improve, which is especially valuable for formative assessment purposes.</div>
+    </div>
+  </div>
+
   <!-- References -->
   <div class="references">
     <h3>References</h3>
@@ -195,6 +276,77 @@
       feedback.className = 'mcq-feedback show incorrect-fb';
     }
     feedback.style.display = 'block';
+    btn.disabled = true;
+    btn.textContent = 'Answered';
+  }
+
+  /* True/False quiz logic */
+  function checkTF(btn, isTrueAnswer) {
+    const statement = btn.closest('.tf-statement');
+    const feedback = statement.querySelector('.tf-feedback');
+    const correctAnswer = feedback.dataset.correct === 'true';
+    const btns = statement.querySelectorAll('.tf-btns button');
+    btns.forEach(function(b) {
+      b.disabled = true;
+      b.style.pointerEvents = 'none';
+    });
+    const clickedCorrect = (isTrueAnswer === correctAnswer);
+    if (clickedCorrect) {
+      btn.classList.add('correct-btn');
+      feedback.className = 'tf-feedback show correct-fb';
+    } else {
+      btn.classList.add('incorrect-btn');
+      btns.forEach(function(b) {
+        if (b !== btn) b.classList.add('correct-btn');
+      });
+      feedback.className = 'tf-feedback show incorrect-fb';
+    }
+  }
+
+  /* Matching quiz logic */
+  function checkMatch(gridId, btn) {
+    const grid = document.getElementById(gridId);
+    const selects = grid.querySelectorAll('.match-select');
+    const resultDiv = document.getElementById(gridId.replace('grid', 'result'));
+    let correct = 0;
+    let total = selects.length;
+    let unanswered = false;
+    selects.forEach(function(sel) {
+      const answer = sel.dataset.answer;
+      if (!sel.value) {
+        unanswered = true;
+        return;
+      }
+      if (sel.value === answer) {
+        correct++;
+        sel.style.borderColor = 'var(--success)';
+        sel.style.backgroundColor = '#d4edda';
+      } else {
+        sel.style.borderColor = 'var(--danger)';
+        sel.style.backgroundColor = '#f8d7da';
+      }
+      sel.disabled = true;
+    });
+    if (unanswered) {
+      resultDiv.textContent = 'Please answer all items before checking.';
+      resultDiv.style.display = 'block';
+      resultDiv.className = 'match-result show';
+      resultDiv.style.background = '#f8d7da';
+      resultDiv.style.color = '#721c24';
+      selects.forEach(function(sel) { sel.disabled = false; sel.style.borderColor = ''; sel.style.backgroundColor = ''; });
+      return;
+    }
+    resultDiv.style.display = 'block';
+    resultDiv.className = 'match-result show';
+    if (correct === total) {
+      resultDiv.textContent = 'All ' + total + ' matches correct! Well done.';
+      resultDiv.style.background = '#d4edda';
+      resultDiv.style.color = '#155724';
+    } else {
+      resultDiv.textContent = correct + ' out of ' + total + ' correct. Review the highlighted items and try again.';
+      resultDiv.style.background = '#f8d7da';
+      resultDiv.style.color = '#721c24';
+    }
     btn.disabled = true;
     btn.textContent = 'Answered';
   }

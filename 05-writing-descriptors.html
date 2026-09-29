@@ -103,6 +103,67 @@
     <p>If two trained academics cannot agree on a score using your rubric, the problem is the rubric, not the markers.</p>
   </div>
 
+  <!-- Fill-in-the-Blank Exercise -->
+  <div class="fib-box" id="fib-quiz-05">
+    <h3>Fill in the Blanks</h3>
+    <p style="margin-bottom: 0.8em;">Complete each statement about descriptor writing by typing the missing word or phrase in the blank.</p>
+
+    <div class="fib-item">
+      <span>1. A good descriptor describes what the work <input type="text" class="fib-input" data-answer="looks like" placeholder="..."> , not how the marker feels about it.</span>
+      <span class="fib-answer">looks like</span>
+    </div>
+
+    <div class="fib-item">
+      <span>2. The lowest level should describe what <input type="text" class="fib-input" data-answer="is" placeholder="..."> present, not what is absent.</span>
+      <span class="fib-answer">is</span>
+    </div>
+
+    <div class="fib-item">
+      <span>3. Parallel structure means the same <input type="text" class="fib-input" data-answer="dimension" placeholder="..."> stays the same across levels; only the degree changes.</span>
+      <span class="fib-answer">dimension</span>
+    </div>
+
+    <div class="fib-item">
+      <span>4. Words like &ldquo;adequate&rdquo; and &ldquo;reasonable&rdquo; are examples of <input type="text" class="fib-input" data-answer="vague" placeholder="..."> evaluative language that undermine scoring reliability.</span>
+      <span class="fib-answer">vague</span>
+    </div>
+
+    <button class="mcq-check-btn" onclick="checkFIB('fib-quiz-05')" style="margin-top: 1em;">Check Answers</button>
+    <div class="mcq-feedback" id="fib-quiz-05-fb"></div>
+  </div>
+
+  <!-- True/False Set -->
+  <div class="tf-box" id="tf-quiz-05">
+    <h3>True or False?</h3>
+
+    <div class="tf-statement">
+      <span>1. A descriptor that says &ldquo;shows good understanding&rdquo; is useful because every marker shares the same idea of what &ldquo;good&rdquo; means.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, false)">True</button>
+        <button onclick="checkTF(this, false)">False</button>
+      </span>
+      <div class="tf-feedback">False. Words like &ldquo;good&rdquo; are vague evaluative language. Different markers interpret &ldquo;good&rdquo; differently, which undermines scoring reliability. A useful descriptor replaces subjective labels with observable evidence that any trained marker can identify.</div>
+    </div>
+
+    <div class="tf-statement">
+      <span>2. The colleague calibration test involves asking someone unfamiliar with the rubric to score sample work using only the rubric itself.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, true)">True</button>
+        <button onclick="checkTF(this, true)">False</button>
+      </span>
+      <div class="tf-feedback">Correct. The calibration test gives the rubric to a colleague who was not involved in writing it, asks them to score a sample submission using only the rubric, and then compares their scores with yours. Where scores diverge, the descriptors need revision &mdash; the rubric should speak for itself without verbal explanation.</div>
+    </div>
+
+    <div class="tf-statement">
+      <span>3. A checklist (e.g., &ldquo;includes introduction, body, and conclusion&rdquo;) serves the same purpose as a descriptor in a rubric.</span>
+      <span class="tf-btns">
+        <button onclick="checkTF(this, false)">True</button>
+        <button onclick="checkTF(this, false)">False</button>
+      </span>
+      <div class="tf-feedback">False. A checklist identifies whether features are present or absent, but does not describe quality. A descriptor indicates <em>how well</em> those features are executed &mdash; for example, not just &ldquo;has an introduction&rdquo; but &ldquo;introduction clearly frames the argument and previews the structure of the analysis.&rdquo;</div>
+    </div>
+  </div>
+
   <!-- Mid-Course Reflection -->
   <div class="reflection-box">
     <h3>Pause and Reflect</h3>
@@ -159,8 +220,9 @@
     <a href="06-clo-rubrics-differ.html">Page 6: CLO Rubrics &rarr;</a>
   </nav>
 
-  <!-- MCQ JavaScript -->
+  <!-- Quiz JavaScript -->
   <script>
+  /* --- MCQ --- */
   function selectOption(li) {
     li.parentElement.querySelectorAll('li').forEach(item => item.classList.remove('selected'));
     li.classList.add('selected');
@@ -184,6 +246,63 @@
     feedback.style.display = 'block';
     btn.disabled = true;
     btn.textContent = 'Answered';
+  }
+
+  /* --- Fill-in-the-blank --- */
+  function checkFIB(boxId) {
+    var box = document.getElementById(boxId);
+    var items = box.querySelectorAll('.fib-item');
+    var fb = document.getElementById(boxId + '-fb');
+    var correctCount = 0;
+    var total = items.length;
+    items.forEach(function(item) {
+      var input = item.querySelector('.fib-input');
+      var answerSpan = item.querySelector('.fib-answer');
+      var correctAnswer = input.getAttribute('data-answer').toLowerCase().trim();
+      var userAnswer = input.value.toLowerCase().trim();
+      input.classList.remove('correct-input', 'incorrect-input');
+      answerSpan.classList.remove('show');
+      if (userAnswer === correctAnswer) {
+        input.classList.add('correct-input');
+        correctCount++;
+      } else {
+        input.classList.add('incorrect-input');
+        answerSpan.classList.add('show');
+      }
+      input.readOnly = true;
+    });
+    if (correctCount === total) {
+      fb.textContent = 'All ' + total + ' blanks are correct. You have a solid grasp of what makes descriptors effective.';
+      fb.className = 'mcq-feedback show correct-fb';
+    } else {
+      fb.textContent = correctCount + ' out of ' + total + ' correct. The correct answers are shown in green next to any blanks you missed.';
+      fb.className = 'mcq-feedback show incorrect-fb';
+    }
+    var btn = box.querySelector('.mcq-check-btn');
+    btn.disabled = true;
+    btn.textContent = 'Answered';
+  }
+
+  /* --- True/False --- */
+  function checkTF(btn, isCorrectAnswer) {
+    var statement = btn.closest('.tf-statement');
+    var buttons = statement.querySelectorAll('.tf-btns button');
+    var feedback = statement.querySelector('.tf-feedback');
+    buttons.forEach(function(b) {
+      b.disabled = true;
+      b.classList.remove('correct-btn', 'incorrect-btn');
+    });
+    if (isCorrectAnswer) {
+      btn.classList.add('correct-btn');
+      feedback.className = 'tf-feedback show correct-fb';
+    } else {
+      btn.classList.add('incorrect-btn');
+      var correctLabel = isCorrectAnswer ? 'True' : 'False';
+      buttons.forEach(function(b) {
+        if (b.textContent.trim() === correctLabel) b.classList.add('correct-btn');
+      });
+      feedback.className = 'tf-feedback show incorrect-fb';
+    }
   }
   </script>
 
